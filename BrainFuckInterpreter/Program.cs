@@ -86,11 +86,6 @@ else
     code = ReadFromStdIn();
 }
 
-/*
-if (Validator.IsValidCode(code, out var validationError) == false)
-{
-    Console.Error.WriteLine($"Validation Warning: {validationError}");
-}*/
 
 var memoryLengthStr = Environment.GetEnvironmentVariable(Constants.MEMORY_STRIP_LENGTH)?.Trim() 
                       ?? Constants.DEFAULT_MEMORY_STRIP_LENGTH.ToString();
