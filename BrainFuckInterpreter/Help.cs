@@ -26,6 +26,7 @@ public static class Help
             Environment variables:
                 MEMORY_STRIP_LENGTH         Set this variable to a positive integer to set how long the memory strip needs to be.
                                             Default is {Constants.DEFAULT_MEMORY_STRIP_LENGTH}
+            
          """;
     
     
