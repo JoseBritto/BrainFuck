@@ -7,7 +7,7 @@ public static class Help
     private static readonly string ExeName = AppDomain.CurrentDomain.FriendlyName;
     private static readonly string HelpMessage = 
         $"""
-            The Brainfuck interpreter by Britto
+            The Brainfuck interpreter by Jose Britto
 
             Usage: 
                 {ExeName} [option] [file]
