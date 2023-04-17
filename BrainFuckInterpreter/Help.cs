@@ -20,7 +20,7 @@ public static class Help
 
             Options:
                 -h, --help, help            show this help message and exit
-                -v --version, version       output the curent version and exit
+                -v --version, version       output the current version and exit
                 --validate, validate        validate the input and print any validation errors
 
             Environment variables:
