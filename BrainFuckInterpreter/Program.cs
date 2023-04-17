@@ -7,9 +7,43 @@ string code;
 
 if (args.Length >= 1)
 {
+    var validateAndExit = false;
+    
+    var option = args[0].ToLower();
+    var encounteredOption = false;
+    
+    
+    switch (option)
+    {
+        case "--validate":
+        case "validate":
+            validateAndExit = encounteredOption = true;
+            break;
+                
+        case "version":
+        case "-v":
+        case "--version":
+            Help.PrintVersion();
+            encounteredOption = true;
+            return 0;
+                
+        case "help":
+        case "-h":
+        case "--help":
+            Help.PrintHelp();
+            encounteredOption = true;
+            return 0;
+    }
+    
+    
     try
     {
-        code = await File.ReadAllTextAsync(args[0]);
+        if((encounteredOption && args.Length > 1) || !encounteredOption)
+            code = await File.ReadAllTextAsync(args[^1]); // Use the last argument as the file name as we can use the first as an option
+        else
+        {
+            code = ReadFromStdIn();
+        }
     }
     catch (IOException e)
     {
@@ -32,9 +66,48 @@ if (args.Length >= 1)
         return 1;
     }
     
+    
+    if(validateAndExit)
+    {
+        if (Validator.IsValidCode(code, out var validationError) == false)
+        {
+            Console.WriteLine($"Validation failed: {validationError}");
+        }
+        else
+        {
+            Console.WriteLine($"Validation passed! No errors were found!");
+        }
+        return 0;
+    }
+    
 }
 else
 {
+    code = ReadFromStdIn();
+}
+
+/*
+if (Validator.IsValidCode(code, out var validationError) == false)
+{
+    Console.Error.WriteLine($"Validation Warning: {validationError}");
+}*/
+
+var memoryLengthStr = Environment.GetEnvironmentVariable(Constants.MEMORY_STRIP_LENGTH)?.Trim() 
+                      ?? Constants.DEFAULT_MEMORY_STRIP_LENGTH.ToString();
+
+if (int.TryParse(memoryLengthStr, out var memLength) == false || memLength < 2)
+{
+    Console.Error.WriteLine($"{memoryLengthStr} is not a valid value for memory strip length");
+    return 3;
+}
+
+new Runtime(memLength).Execute(code);
+
+return 0;
+
+string ReadFromStdIn()
+{
+    string code1;
     string? s;
     var partialCode = new StringBuilder();
     while (string.IsNullOrEmpty(s = Console.ReadLine()) == false)
@@ -42,22 +115,6 @@ else
         partialCode.AppendLine(s);
     }
 
-    code = partialCode.ToString();
+    code1 = partialCode.ToString();
+    return code1;
 }
-
-if (Validator.IsValidCode(code, out var validationError) == false)
-{
-    Console.Error.WriteLine($"Validation Warning: {validationError}");
-}
-
-var memoryLengthStr = Environment.GetEnvironmentVariable("MEMORY_STRIP_LENGTH")?.Trim() ?? "40000";
-
-if (int.TryParse(memoryLengthStr, out var memLength) == false)
-{
-    Console.Error.WriteLine($"{memoryLengthStr} is not a valid value for memory length");
-    return 3;
-}
-
-new Runtime(memLength).Execute(code);
-
-return 0;
