@@ -21,15 +21,15 @@ My shot at creating a brainfuck interpreter in C#
  For further information about the various options that the build command supports refer to the [documentation](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-build) 
 
  ## Usage   
- BrainFuckInterpreter [option] [file]
+ ``` BrainFuckInterpreter [option] [file] ```
  Here the options and input file are optional. 
  If no file is provided the program reads the code from standard input until it encounters an empty line input.
  This means you can also pipe input text from other programs. 
     
  Example: 
     
-    cat hello_world.bf | bf
-    The above line will read from a file called hello_world.bf and pipes it into BrainFuckInterpreter as input.
+    ``` cat hello_world.bf | bf ```
+   The above line will read from a file called hello_world.bf and pipes it into BrainFuckInterpreter as input.
 
    Options:
    
