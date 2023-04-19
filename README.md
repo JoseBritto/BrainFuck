@@ -24,6 +24,7 @@ My shot at creating a brainfuck interpreter in C#
    The Brainfuck interpreter by Britto
 
    Usage: 
+   
        BrainFuckInterpreter [option] [file]
        Here the options and input file are optional. 
        If no file is provided the program reads the code from standard input until it encounters an empty line input.
@@ -33,6 +34,7 @@ My shot at creating a brainfuck interpreter in C#
        The above line will read from a file called hello_world.bf and pipes it into BrainFuckInterpreter as input.
 
    Options:
+   
        -h, --help, help            show this help message and exit
        -v --version, version       output the current version and exit
        --validate, validate        validate the input and print any validation errors
