@@ -40,6 +40,7 @@ My shot at creating a brainfuck interpreter in C#
        --validate, validate        validate the input and print any validation errors
 
    Environment variables:
+   
        MEMORY_STRIP_LENGTH         Set this variable to a positive integer to set how long the memory strip needs to be.
                                    Default is 40000
 
