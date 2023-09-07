@@ -33,6 +33,13 @@ My shot at creating a brainfuck interpreter in C#
    
    The above line will read from a file called hello_world.bf and pipes it into BrainFuckInterpreter as input.
 
+   The ffollowing can be the contents of hello_world.bf:
+   ```
+   >++++++++[<+++++++++>-]<.>++++[<+++++++>-]<+.+++++++..+++.>>++++++[<+++++++>-]<+
+   +.------------.>++++++[<+++++++++>-]<+.<.+++.------.--------.>>>++++[<++++++++>-
+   ]<+.
+   ```
+
    Options:
    
        -h, --help, help            show this help message and exit
